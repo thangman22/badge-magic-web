@@ -59,6 +59,49 @@ header p {
     font-size: 1rem;
 }
 
+.github-footer {
+    text-align: center;
+    margin-top: 1.5rem;
+    padding-top: 1rem;
+}
+
+.footer-credit {
+    font-size: 0.875rem;
+    color: var(--text-secondary);
+    margin-bottom: 0.5rem;
+}
+
+.footer-credit a {
+    color: var(--accent);
+    text-decoration: none;
+}
+
+.footer-credit a:hover {
+    text-decoration: underline;
+}
+
+.github-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.4rem 0.75rem;
+    color: var(--text-secondary);
+    text-decoration: none;
+    font-size: 0.875rem;
+    border-radius: 8px;
+    transition: var(--transition);
+}
+
+.github-link:hover {
+    color: var(--accent);
+    background: var(--accent-glow);
+}
+
+.github-icon {
+    width: 1.25rem;
+    height: 1.25rem;
+}
+
 .glassmorphism {
     background: var(--card-bg);
     border: 1px solid var(--card-border);

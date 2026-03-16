@@ -1,0 +1,247 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-width=1.0" />
+    <title>Badge Magic</title>
+    <meta
+      name="description"
+      content="Program your FOSSASIA LED Badge via Web Bluetooth without installing any app."
+    />
+    <link rel="stylesheet" href="styles.css" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=Silkscreen:wght@400;700&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+  <body>
+    <div class="background-effects">
+      <div class="glow-orb orb-1"></div>
+      <div class="glow-orb orb-2"></div>
+    </div>
+
+    <main class="container">
+      <header>
+        <h1>Badge Magic</h1>
+        <p>Control your LED Badge directly from the browser</p>
+        <!-- Hidden font preloader -->
+        <div
+          style="
+            font-size: 0;
+            height: 0;
+            visibility: hidden;
+            pointer-events: none;
+            position: absolute;
+          "
+        >
+          <span style="font-family: &quot;Press Start 2P&quot;">.</span>
+          <span style="font-family: &quot;Silkscreen&quot;">.</span>
+        </div>
+      </header>
+
+      <section class="card glassmorphism">
+        <div class="app-container">
+          <!-- Live Preview Grid -->
+          <div class="preview-container">
+            <div class="led-matrix" id="led-matrix">
+              <!-- 11x44 grid injected via JS -->
+            </div>
+          </div>
+
+          <div class="message-input-area">
+            <div class="input-group" style="margin-bottom: 0.5rem">
+              <textarea
+                id="message"
+                placeholder="HELLO WORLD"
+                rows="2"
+                maxlength="250"
+              >
+HELLO WORLD</textarea
+              >
+            </div>
+
+            <div
+              style="
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                margin-bottom: 1rem;
+              "
+            >
+              <div
+                style="
+                  font-size: 0.75rem;
+                  color: var(--text-secondary);
+                  text-transform: uppercase;
+                  font-weight: 600;
+                  letter-spacing: 0.05em;
+                "
+              >
+                Insert Badge Icon
+              </div>
+              <div class="font-selector-container">
+                <select id="font-family" class="font-select">
+                  <option value="default">Default Font (Handcrafted)</option>
+                  <option value="Press Start 2P">Retro 8-Bit</option>
+                  <option value="Silkscreen">Silkscreen</option>
+                </select>
+              </div>
+            </div>
+            <div class="icon-picker" id="icon-picker">
+              <!-- Icons injected here -->
+            </div>
+          </div>
+
+          <div class="tabs">
+            <button class="tab-btn active" data-tab="speedTab">Speed</button>
+            <button class="tab-btn" data-tab="transitionTab">Animation</button>
+            <button class="tab-btn" data-tab="effectTab">Effect</button>
+          </div>
+
+          <div class="tab-content active" id="speedTab">
+            <div class="input-group">
+              <label for="speedSlider"
+                >Speed: <span id="speed-display">2</span></label
+              >
+              <input
+                type="range"
+                id="speedSlider"
+                min="1"
+                max="8"
+                value="2"
+                class="normal-slider"
+              />
+              <!-- Hidden select to keep logic backward compatible -->
+              <select id="speed" style="display: none">
+                <option value="0">1</option>
+                <option value="16">2</option>
+                <option value="32">3</option>
+                <option value="48">4</option>
+                <option value="64">5</option>
+                <option value="80">6</option>
+                <option value="96">7</option>
+                <option value="112" selected>8</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="tab-content" id="transitionTab">
+            <div
+              style="
+                padding: 10px;
+                display: flex;
+                flex-direction: column;
+                gap: 15px;
+              "
+            >
+              <div class="effect-grid" id="transition-grid">
+                <button class="visual-select-btn active" data-value="0">
+                  <img src="assets/animations/ic_anim_left.gif" alt="Left" />
+                  <span>Left</span>
+                </button>
+                <button class="visual-select-btn" data-value="1">
+                  <img src="assets/animations/ic_anim_right.gif" alt="Right" />
+                  <span>Right</span>
+                </button>
+                <button class="visual-select-btn" data-value="2">
+                  <img src="assets/animations/ic_anim_up.gif" alt="Up" />
+                  <span>Up</span>
+                </button>
+                <button class="visual-select-btn" data-value="3">
+                  <img src="assets/animations/ic_anim_down.gif" alt="Down" />
+                  <span>Down</span>
+                </button>
+                <button class="visual-select-btn" data-value="4">
+                  <img src="assets/animations/ic_anim_fixed.gif" alt="Fixed" />
+                  <span>Fixed</span>
+                </button>
+                <button class="visual-select-btn" data-value="5">
+                  <img
+                    src="assets/animations/ic_anim_animation.gif"
+                    alt="Animation"
+                  />
+                  <span>Animation</span>
+                </button>
+                <button class="visual-select-btn" data-value="6">
+                  <img
+                    src="assets/animations/ic_anim_snowflake.gif"
+                    alt="Snowflake"
+                  />
+                  <span>Snowflake</span>
+                </button>
+                <button class="visual-select-btn" data-value="7">
+                  <img
+                    src="assets/animations/ic_anim_picture.gif"
+                    alt="Picture"
+                  />
+                  <span>Picture</span>
+                </button>
+                <button class="visual-select-btn" data-value="8">
+                  <img src="assets/animations/ic_anim_laser.gif" alt="Laser" />
+                  <span>Laser</span>
+                </button>
+              </div>
+            </div>
+
+            <!-- Hidden transition select for backend -->
+            <select id="effect" style="display: none">
+              <option value="0" selected>Left</option>
+              <option value="1">Right</option>
+              <option value="2">Up</option>
+              <option value="3">Down</option>
+              <option value="4">Fixed</option>
+              <option value="5">Animation</option>
+              <option value="6">Snowflake</option>
+              <option value="7">Picture</option>
+              <option value="8">Laser</option>
+              <option value="9">Pacman</option>
+              <option value="10">Chevron</option>
+              <option value="11">Diamond</option>
+              <option value="12">Broken</option>
+              <option value="13">Cupid</option>
+              <option value="14">Feet</option>
+              <option value="15">Fish</option>
+              <option value="16">Diagonal</option>
+              <option value="17">Alert</option>
+              <option value="18">Heartbeat</option>
+              <option value="19">Fireworks</option>
+              <option value="20">Equalizer</option>
+            </select>
+          </div>
+
+          <div class="tab-content" id="effectTab">
+            <div class="effect-grid" id="visual-effect-grid">
+              <button class="visual-effect-btn" data-effect="flash">
+                <img src="assets/effects/ic_effect_flash.gif" alt="Flash" />
+                <span>Flash</span>
+              </button>
+              <button class="visual-effect-btn" data-effect="marquee">
+                <img src="assets/effects/ic_effect_marquee.gif" alt="Marquee" />
+                <span>Marquee</span>
+              </button>
+              <button class="visual-effect-btn" data-effect="invert">
+                <img src="assets/effects/ic_effect_invert.gif" alt="Invert" />
+                <span>Invert</span>
+              </button>
+            </div>
+
+            <!-- Keep these for JS logic compatibility -->
+            <input type="checkbox" id="flash" style="display: none" />
+            <input type="checkbox" id="marquee" style="display: none" />
+            <input type="checkbox" id="invert" style="display: none" />
+          </div>
+          <button id="send-btn" class="primary-btn">
+            <span>Connect & Send</span>
+            <div class="btn-glow"></div>
+          </button>
+
+          <div id="status" class="status-message">Ready to connect...</div>
+        </div>
+      </section>
+    </main>
+
+    <script src="charCodes.js"></script>
+    <script src="svgAssets.js"></script>
+    <script src="app.js"></script>
+  </body>
+</html>

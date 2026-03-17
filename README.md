@@ -1,5 +1,7 @@
 # Magic Badge
 
+![Badge Magic – LED Badge Designer](repo-image.png)
+
 **Design and send messages to FOSSASIA LED name badges from your browser.** No app required—create animated text, pick from hundreds of pixel-art icons, and preview on a live 11×44 grid before connecting via Web Bluetooth or the Badge Magic app.
 
 ## What’s in this repo
